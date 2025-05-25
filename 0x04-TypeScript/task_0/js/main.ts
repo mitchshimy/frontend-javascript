@@ -24,20 +24,43 @@ const student2: Student = {
 // Create a list of students
 const studentsList: Student[] = [student1, student2];
 
-// Render a table using Vanilla JS
+// Create the table and header row
 const table = document.createElement("table");
-const headerRow = table.insertRow();
-headerRow.innerHTML = "<th>First Name</th><th>Location</th>";
+const headerRow = document.createElement("tr");
 
-// Populate the table rows
+const header1 = document.createElement("th");
+header1.textContent = "First Name";
+
+const header2 = document.createElement("th");
+header2.textContent = "Location";
+
+headerRow.appendChild(header1);
+headerRow.appendChild(header2);
+table.appendChild(headerRow);
+
+// Populate table rows
 studentsList.forEach((student) => {
-  const row = table.insertRow();
-  const nameCell = row.insertCell();
-  const locationCell = row.insertCell();
+  const row = document.createElement("tr");
 
+  const nameCell = document.createElement("td");
   nameCell.textContent = student.firstName;
+
+  const locationCell = document.createElement("td");
   locationCell.textContent = student.location;
+
+  row.appendChild(nameCell);
+  row.appendChild(locationCell);
+  table.appendChild(row);
 });
 
-// Append the table to the document body
+// Optional basic styling
+table.style.borderCollapse = "collapse";
+table.style.width = "50%";
+table.style.margin = "20px";
+table.querySelectorAll("th, td").forEach(cell => {
+  cell.style.border = "1px solid #ccc";
+  cell.style.padding = "8px";
+});
+
+// Append the table to the body
 document.body.appendChild(table);
